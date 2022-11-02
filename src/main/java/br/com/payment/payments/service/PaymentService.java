@@ -26,7 +26,7 @@ public class PaymentService {
                 .map(p -> modelMapper.map(p, PaymentDto.class));
     }
 
-    public PaymentDto getById (Integer id) {
+    public PaymentDto getById (Long id) {
         Payment payment = repository.findById(id)
              .orElseThrow(() -> new EntityNotFoundException());
 
@@ -40,7 +40,7 @@ public class PaymentService {
         return modelMapper.map(payment, PaymentDto.class);
     }
 
-    public PaymentDto updatePayment(Integer id, PaymentDto dto) {
+    public PaymentDto updatePayment(Long id, PaymentDto dto) {
         Payment payment = modelMapper.map(dto, Payment.class);
         payment.setId(id);
         payment = repository.save(payment);
@@ -48,7 +48,7 @@ public class PaymentService {
         return modelMapper.map(payment, PaymentDto.class);
     }
 
-    public void deletePayment(Integer id) {
+    public void deletePayment(Long id) {
         repository.deleteById(id);
     }
 

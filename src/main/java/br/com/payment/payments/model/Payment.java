@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
@@ -23,21 +22,27 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotNull
+    private Long id;
+
     @Positive
+    @Column(name = "amount")
     private BigDecimal amount;
-    @NotBlank
+
     @Size(max=20)
+    @Column(name = "payment_type")
     private String paymentType;
-    @NotBlank
-    @Size(max=19)
+
+    @Size(max=20)
+    @Column(name = "payment_code")
     private String paymentCode;
-    @NotNull
+
+    @Column(name = "schedule_id")
     private Integer scheduleId;
-    @NotNull
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
 }

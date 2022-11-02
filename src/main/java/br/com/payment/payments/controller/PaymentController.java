@@ -23,12 +23,12 @@ public class PaymentController {
     private PaymentService service;
 
     @GetMapping
-    public Page<PaymentDto> list(@PageableDefault(size=20) Pageable pagination) {
+    public Page<PaymentDto> list(@PageableDefault(size=10) Pageable pagination) {
         return service.getAll(pagination);
     }
 
     @GetMapping("/id")
-    public ResponseEntity<PaymentDto> detail (@PathVariable @NotNull Integer id) {
+    public ResponseEntity<PaymentDto> detail (@PathVariable @NotNull Long id) {
         PaymentDto dto = service.getById(id);
         return ResponseEntity.ok(dto);
     }
@@ -42,14 +42,14 @@ public class PaymentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PaymentDto> update (@PathVariable @NotNull Integer id, @RequestBody @Valid PaymentDto dto) {
+    public ResponseEntity<PaymentDto> update (@PathVariable @NotNull Long id, @RequestBody @Valid PaymentDto dto) {
         PaymentDto updated = service.updatePayment(id, dto);
 
         return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<PaymentDto> remove (@PathVariable @NotNull Integer id) {
+    public ResponseEntity<PaymentDto> remove (@PathVariable @NotNull Long id) {
         service.deletePayment(id);
         return ResponseEntity.noContent().build();
     }

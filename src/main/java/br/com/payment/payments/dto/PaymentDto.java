@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @Setter
 public class PaymentDto {
 
-    private Integer id;
+    private Long id;
     private BigDecimal amount;
     private String paymentType;
     private String paymentCode;
-    private Integer scheduleId;
+    private String scheduleId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
