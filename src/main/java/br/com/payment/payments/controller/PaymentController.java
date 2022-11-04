@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
@@ -27,7 +28,7 @@ public class PaymentController {
         return service.getAll(pagination);
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<PaymentDto> detail (@PathVariable @NotNull Long id) {
         PaymentDto dto = service.getById(id);
         return ResponseEntity.ok(dto);
