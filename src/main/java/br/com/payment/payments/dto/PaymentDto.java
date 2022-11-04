@@ -21,6 +21,10 @@ public class PaymentDto {
     private LocalDateTime createdAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDateTime updatedAt;
+	
+    public PaymentDto(Object object, String string) {
+		// TODO Auto-generated constructor stub
+	}
 	public Long getId() {
 		return id;
 	}

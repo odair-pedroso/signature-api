@@ -71,16 +71,20 @@ public class PaymentController {
 	        paymentQueue.send(paymentDto.toString());
 	        return ResponseEntity.created(address).body(paymentDto);
     	} else {
-    		return (ResponseEntity<PaymentDto>) ResponseEntity.badRequest();
+    		return ResponseEntity.badRequest().build();
     	}
-    	
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PaymentDto> update (@PathVariable @NotNull Long id, @RequestBody @Valid PaymentDto dto) {
-        PaymentDto updated = service.updatePayment(id, dto);
 
-        return ResponseEntity.ok(updated);
+    	if (sheduleValidate(dto.getScheduleId())) { 
+    		PaymentDto updated = service.updatePayment(id, dto);
+    		return ResponseEntity.ok(updated);
+    	} else {
+    		return ResponseEntity.badRequest().body(new PaymentDto(null, "product validation failed!"));
+    	}
+
     }
 
     @DeleteMapping("/{id}")
@@ -88,7 +92,5 @@ public class PaymentController {
         service.deletePayment(id);
         return ResponseEntity.noContent().build();
     }
-
-
 
 }
