@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="payments")
+@Table(name="payment")
 //@Getter
 //@Setter
 @AllArgsConstructor
@@ -23,38 +23,30 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Positive
     @Column(name = "amount")
     private BigDecimal amount;
 
     @Size(max=20)
-    @Column(name = "payment_type")
+    @Column(name = "paymenttype")
     private String paymentType;
 
     @Size(max=20)
-    @Column(name = "payment_code")
+    @Column(name = "paymentcode")
     private String paymentCode;
 
-    @Column(name = "schedule_id")
+    @Column(name = "scheduleid")
     private Integer scheduleId;
 
-    @Column(name = "created_at")
+    @Column(name = "createdat")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updatedat")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDateTime updatedAt;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public BigDecimal getAmount() {
 		return amount;
@@ -104,6 +96,12 @@ public class Payment {
 		this.updatedAt = updatedAt;
 	}
 
-    
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
     
 }

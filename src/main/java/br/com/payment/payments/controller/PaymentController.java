@@ -46,7 +46,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentDto> detail (@PathVariable @NotNull Long id) {
+    public ResponseEntity<PaymentDto> detail (@PathVariable @NotNull Integer id) {
         PaymentDto dto = service.getById(id);
         return ResponseEntity.ok(dto);
     }
@@ -65,7 +65,7 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<PaymentDto> register (@RequestBody @Valid PaymentDto dto, UriComponentsBuilder uriBuilder) {
     	
-    	if (!sheduleValidate(dto.getScheduleId())) { 
+    	if (sheduleValidate(dto.getScheduleId())) { 
 	        PaymentDto paymentDto = service.createPayment(dto);
 	        URI address = uriBuilder.path("/payments/{id}").buildAndExpand(paymentDto.getId()).toUri();
 	        paymentQueue.send(paymentDto.toString());
@@ -76,19 +76,19 @@ public class PaymentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PaymentDto> update (@PathVariable @NotNull Long id, @RequestBody @Valid PaymentDto dto) {
+    public ResponseEntity<PaymentDto> update (@PathVariable @NotNull Integer id, @RequestBody @Valid PaymentDto dto) {
 
     	if (sheduleValidate(dto.getScheduleId())) { 
     		PaymentDto updated = service.updatePayment(id, dto);
     		return ResponseEntity.ok(updated);
     	} else {
-    		return ResponseEntity.badRequest().body(new PaymentDto(null, "product validation failed!"));
+    		return ResponseEntity.badRequest().build();
     	}
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<PaymentDto> remove (@PathVariable @NotNull Long id) {
+    public ResponseEntity<PaymentDto> remove (@PathVariable @NotNull Integer id) {
         service.deletePayment(id);
         return ResponseEntity.noContent().build();
     }

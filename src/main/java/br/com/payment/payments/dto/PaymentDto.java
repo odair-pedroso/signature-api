@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 //@Setter
 public class PaymentDto {
 
-    private Long id;
+    private Integer id;
     private BigDecimal amount;
     private String paymentType;
     private String paymentCode;
@@ -22,15 +22,14 @@ public class PaymentDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private LocalDateTime updatedAt;
 	
-    public PaymentDto(Object object, String string) {
-		// TODO Auto-generated constructor stub
-	}
-	public Long getId() {
+    public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -69,9 +68,10 @@ public class PaymentDto {
 	}
 	@Override
 	public String toString() {
-		return "{\"id\":" + id + ", amount:" + amount + ", \"paymentType\":\"" + paymentType + "\", \"paymentCode\":\""
-				+ paymentCode + "\", \"scheduleId\":\"" + scheduleId + "\", \"createdAt\":\"" + createdAt + "\", \"updatedAt\":\"" + updatedAt
-				+ "\"}";
+//		return "{\"id\":" + id + ", amount:" + amount + ", \"paymentType\":\"" + paymentType + "\", \"paymentCode\":\""
+//				+ paymentCode + "\", \"scheduleId\":\"" + scheduleId + "\", \"createdAt\":\"" + createdAt + "\", \"updatedAt\":\"" + updatedAt
+//				+ "\"}";
+		return id.toString();
 	}
 
 
